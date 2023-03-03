@@ -77,4 +77,28 @@ cd build
 
 ![image2](random_initial.png)
 
-Finally, it can find stationary patterns.
+Finally, it can find stationary patterns:
+
+```
+cd build
+./bin/golSimulator find_pattern -c rows columns alive_cells_number -n evolutions
+```
+
+For example, when I set evolutions to 1000, it will output stationary pattern every time:
+
+```
+cd build
+./bin/golSimulator find_pattern -c 4 4 8 -n 1000
+```
+
+In this situation, I find the following still lifes:
+
+![1](1.png) ![2](2.png) ![3](3.png) ![4](4.png)
+
+![5](5.png) ![6](6.png) ![7](7.png) ![8](8.png)
+
+![9](9.png) ![10](10.png) ![11](11.png) ![12](12.png)
+
+And here are examples for still lifes that only exist on a 4 by 4 grid:
+
+![1](1.png) ![5](5.png)![11](11.png)
