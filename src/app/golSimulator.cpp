@@ -45,6 +45,24 @@ int main(int argc, char **argv) {
   app.add_option("-n,-N", genera_num, "Number of generations")
       ->check(CLI::NonNegativeNumber);
 
+  CLI11_PARSE(app, argc, argv);
+
+  // Run the selected subcommand
+  if (random_initial->parsed()) {
+    Gameoflife grid = *new Grid(size[0], size[1], size[2]);
+    for (int iter = 0; iter < genera_num; iter++) {
+      grid.takeStep();
+    }
+    grid.printGrid();
+  } else if (file_input->parsed()) {
+    Gameoflife grid = *new Grid(filename);
+    for (int iter = 0; iter < genera_num; iter++) {
+      grid.takeStep();
+    }
+    grid.printGrid();
+  } else if (find_pattern->parsed()) {
+    Gameoflife grid = *new Grid(Control[0], Control[1], Control[2]);
+  }
 
   return 0;
 }
