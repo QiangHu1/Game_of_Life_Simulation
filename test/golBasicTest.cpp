@@ -12,22 +12,24 @@
 
 =============================================================================*/
 
+#include "Cell.h"
+#include "Grid.h"
 #include "catch.hpp"
+#include "gameoflife.h"
 #include "golCatchMain.h"
 #include "golMyFunctions.h"
 #include <iostream>
 #include <vector>
+using namespace std;
 
-TEST_CASE( "My first test", "[some group identifier]" ) {
-  int a = 5;
-  REQUIRE( a < 6 );
+TEST_CASE("Check instantiation of Grid") {
+  Grid gd = *new Grid("../../test/data/glider.txt");
+  REQUIRE(gd.rows == 10);
+  REQUIRE(gd.cols == 10);
+  REQUIRE(gd.Alive(3, 3) == 2);
+  gd.setc(3, 3, true);
+  REQUIRE(gd.getc(3, 3));
+  REQUIRE_THROWS(gd.getc(60, 90));
+  REQUIRE_THROWS(gd.setc(80, 90, true));
 }
 
-TEST_CASE( "My second test", "[some group identifier]" ) {
-  std::vector<int> a;
-  REQUIRE( a.size() == 0 );
-}
-
-TEST_CASE( "Simple add", "[MyFirstAddFunction]") {
-  REQUIRE( gol::MyFirstAddFunction(1, 2) == 3);
-}
