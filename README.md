@@ -81,14 +81,14 @@ Finally, it can find stationary patterns:
 
 ```
 cd build
-./bin/golSimulator find_pattern -c rows columns alive_cells_number -n evolutions
+./bin/golSimulator find_pattern -c rows columns alive_cells_number condition_number -n evolutions
 ```
 
-For example, when I set evolutions to 1000, it will output stationary pattern every time:
+For example, when I set evolutions to 1000, it will output around 3 stationary patterns after every running:
 
 ```
 cd build
-./bin/golSimulator find_pattern -c 4 4 8 -n 1000
+./bin/golSimulator find_pattern -c 4 4 8 100 -n 1000
 ```
 
 In this situation, I find the following still lifes:
