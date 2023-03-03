@@ -70,3 +70,11 @@ TEST_CASE("Check initialising the grid from a file") {
   REQUIRE(same);
 }
 
+TEST_CASE("Check fetching live neighbour") {
+  Grid gd = *new Grid("../../test/data/glider.txt");
+  REQUIRE(gd.Alive(0, 0) == 0);
+  REQUIRE(gd.Alive(2, 2) == 3);
+  REQUIRE_THROWS(gd.Alive(14, 42));
+  REQUIRE_THROWS(gd.Alive(-1, 0));
+}
+
