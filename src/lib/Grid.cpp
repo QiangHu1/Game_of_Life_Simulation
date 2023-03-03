@@ -49,3 +49,19 @@ void Grid::printc() {
   cout << endl;
 }
 
+// Methods to get cell
+bool Grid::getc(int row, int col) {
+  if (row < 0 || row >= rows || col < 0 || col >= cols) {
+    throw logic_error("row or column input is invalid.");
+  }
+  return cells[row][col].alive;
+}
+
+// Methods to set cell
+void Grid::setc(int row, int col, bool value) {
+  if (row < 0 || row >= rows || col < 0 || col >= cols) {
+    throw logic_error("row or column input is invalid.");
+  }
+  cells[row][col].alive = value;
+}
+
