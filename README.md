@@ -84,14 +84,14 @@ cd build
 ./bin/golSimulator find_pattern -c rows columns alive_cells_number condition_number -n evolutions
 ```
 
-For example, when I set evolutions to 1000, it will output around 3 stationary patterns after every running:
+For example, when I set evolutions to 1000, and doing the iterations on 100 different random initial conditions, it will output several stationary patterns after every running:
 
 ```
 cd build
 ./bin/golSimulator find_pattern -c 4 4 8 100 -n 1000
 ```
 
-In this situation, I find the following still lifes:
+In this situation, I find the lots of still lifes and the total number exceeds 20. Part of them shows as following.
 
 ![1](1.png) ![2](2.png) ![3](3.png) ![4](4.png)
 
