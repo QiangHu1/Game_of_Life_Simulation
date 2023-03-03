@@ -33,3 +33,21 @@ TEST_CASE("Check instantiation of Grid") {
   REQUIRE_THROWS(gd.setc(80, 90, true));
 }
 
+TEST_CASE("Check randomly initialising") {
+  REQUIRE_THROWS(new Grid(7, 8, 77));
+  REQUIRE_THROWS(new Grid(7, 8, -77));
+  Gameoflife grid = *new Grid(50, 50, 12);
+  Grid grid2 = *new Grid(50, 50, 12);
+  bool same = grid.compare(grid2);
+  REQUIRE(!same);
+  int num_alive = 0;
+  for (int i = 0; i < 50; i++) {
+    for (int j = 0; j < 50; j++) {
+      if (grid2.getc(i, j)) {
+        num_alive++;
+      }
+    }
+  }
+  REQUIRE(num_alive == 12);
+}
+
