@@ -40,3 +40,16 @@ void Gameoflife::printGrid() {
   grid.printc();
 }
 
+bool Gameoflife::compare(Grid grid_nex) {
+  int rows = grid.rows;
+  int cols = grid.cols;
+  for (int r = 0; r < rows; r++) {
+    for (int c = 0; c < cols; c++) {
+      // If one cell different, those two grid are different
+      if (grid.Alive(r, c) != grid_nex.Alive(r, c)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
