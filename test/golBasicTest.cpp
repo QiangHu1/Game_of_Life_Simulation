@@ -78,3 +78,14 @@ TEST_CASE("Check fetching live neighbour") {
   REQUIRE_THROWS(gd.Alive(-1, 0));
 }
 
+TEST_CASE("Check function takeStep") {
+  Gameoflife grid = *new Grid("../../test/data/glider.txt");
+  grid.takeStep();
+  REQUIRE(grid.grid.rows == 10);
+  REQUIRE(grid.grid.cols == 10);
+  REQUIRE(grid.grid.getc(1, 1));
+  REQUIRE(grid.grid.getc(2, 2));
+  REQUIRE(grid.grid.getc(2, 3));
+  REQUIRE(grid.grid.getc(3, 1));
+  REQUIRE(grid.grid.getc(3, 2));
+}
