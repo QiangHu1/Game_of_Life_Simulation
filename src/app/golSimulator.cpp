@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
   find_pattern
       ->add_option("-c, -C", Control,
-                   "Control grid data: rows cols alive_number  iterations")
+                   "Control grid data: rows cols alive_number")
       ->check(CLI::NonNegativeNumber)
       ->required()
       ->expected(3);
@@ -63,7 +63,37 @@ int main(int argc, char **argv) {
     }
     grid.printGrid();
   } else if (find_pattern->parsed()) {
-    Gameoflife grid = *new Grid(Control[0], Control[1], Control[2]);
+    for (int i = 0; i < 100; i++) {
+      Gameoflife grid = *new Grid(Control[0], Control[1], Control[2]);
+      Gameoflife grid_bef = *new Grid(Control[0], Control[1], 0);
+      Grid last_grid;
+      bool same = true;
+      for (int iter = 0; iter < genera_num - 1; iter++) {
+        // The last two grid
+        grid.takeStep();
+      }
+      // Compare the last two grid to last one
+      grid_bef = grid;
+      grid.takeStep();
+      int count = 0;
+      for (int r = 0; r < Control[0]; r++) {
+        for (int c = 0; c < Control[1]; c++) {
+          count += grid.grid.getc(r, c);
+          // If one cell different, those two grid are different
+          if (grid_bef.grid.getc(r, c) != grid.grid.getc(r, c)) {
+            same = false;
+          }
+        }
+      }
+      // Print the result if grids are same and not all dead
+      if (same && count != 0) {
+        grid.printGrid();
+        break;
+      }
+    }
+    cout
+        << "Can't find the stationary pattern, please change the configuration."
+        << endl;
   }
 
   return 0;
