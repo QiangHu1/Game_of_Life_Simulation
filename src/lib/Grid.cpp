@@ -38,3 +38,14 @@ Grid::Grid(int rows, int cols, int num_alive) {
   cells = grid;
 }
 Grid::~Grid() {}
+// Method to print the grid
+void Grid::printc() {
+  for (int r = 0; r < rows; r++) {
+    for (int c = 0; c < cols; c++) {
+      cout << (cells[r][c].alive ? "o" : "-") << " ";
+    }
+    cout << '\n';
+  }
+  cout << endl;
+}
+
