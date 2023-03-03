@@ -23,7 +23,9 @@ int main(int argc, char **argv) {
   auto file_input = app.add_subcommand("file_input", "Input text file");
   auto find_pattern =
       app.add_subcommand("find_pattern", "Finding stationary patterns");
-
+  random_initial->fallthrough();
+  file_input->fallthrough();
+  find_pattern->fallthrough();
   // Add options
   random_initial
       ->add_option("-s, -S", size, "Size of grid: rows cols alive_number")
@@ -43,7 +45,7 @@ int main(int argc, char **argv) {
       ->expected(3);
 
   app.add_option("-n,-N", genera_num, "Number of generations")
-      ->check(CLI::NonNegativeNumber);
+      ->check(CLI::PositiveNumber);
 
   CLI11_PARSE(app, argc, argv);
 
