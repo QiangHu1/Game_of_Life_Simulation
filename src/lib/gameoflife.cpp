@@ -34,3 +34,9 @@ void Gameoflife::takeStep() {
   grid.cells = grid_nex;
 }
 
+void Gameoflife::printGrid() {
+  // Print delimitator first
+  cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>" << '\n' << endl;
+  grid.printc();
+}
+
