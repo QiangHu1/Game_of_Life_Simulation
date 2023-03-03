@@ -65,3 +65,35 @@ void Grid::setc(int row, int col, bool value) {
   cells[row][col].alive = value;
 }
 
+Grid::Grid(string filename) {
+  // Open file
+  ifstream infile;
+  infile.open(filename.data());
+  if (!infile) {
+    throw logic_error("Input file is invalid or not found.");
+  }
+  string s;
+  // load data
+  cells = *new vector<vector<Cell>>();
+  while (getline(infile, s)) {
+    vector<Cell> rows = *new vector<Cell>();
+    for (char cell : s) {
+      Cell c = *new Cell();
+      if (cell == 'o') {
+        c.alive = true;
+        rows.push_back(c);
+      }
+      if (cell == '-') {
+        c.alive = false;
+        rows.push_back(c);
+      }
+    }
+    cells.push_back(rows);
+  }
+  rows = cells.size();
+  cols = cells[0].size();
+
+  // Close the input file
+  infile.close();
+}
+
