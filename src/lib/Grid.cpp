@@ -97,3 +97,20 @@ Grid::Grid(string filename) {
   infile.close();
 }
 
+int Grid::Alive(int row_i, int col_i) {
+  if (row_i < 0 || col_i >= rows || col_i < 0 || col_i >= cols) {
+    throw logic_error("row or column input is invalid.");
+  }
+  int alive_n = 0;
+  for (int r = row_i - 1; r < row_i + 2; r++) {
+    for (int c = col_i - 1; c < col_i + 2; c++) {
+      if ((0 <= r && r < rows && 0 <= c && c < cols) &&
+          (r != row_i || c != col_i)) {
+        alive_n += cells[r][c].alive;
+      } else {
+        alive_n += 0;
+      }
+    }
+  }
+  return alive_n;
+}
