@@ -91,9 +91,6 @@ int main(int argc, char **argv) {
         break;
       }
     }
-    cout
-        << "Can't find the stationary pattern, please change the configuration."
-        << endl;
   }
 
   return 0;
