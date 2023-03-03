@@ -36,4 +36,45 @@ cd build
 ctest
 ```
 
-Additional build and running instructions left to the student.
+Command-line application Instructions
+------------------
+
+To get help message, please use the code below:
+```
+cd build
+./bin/golSimulator -h
+```
+
+This application allows us to input file (.txt) with specific evolutions:
+
+```
+cd build
+./bin/golSimulator file_input file_path -n evolutions
+```
+
+For example, if you want this application run with glider.txt with 4 evolutions:
+```
+cd build
+./bin/golSimulator file_input ../test/data/glider.txt -n 4
+```
+Then you will get the output like this screenshot:
+
+![image1](glider_4.png)
+
+Furthermore, this application can also generate random grid if we input rows, columns, number of alive cells and number of evolutions:
+
+```
+cd build
+./bin/golSimulator random_initial -s rows columns alive_cells_number -n evolutions
+```
+
+Here is an example for the above code with output, which evaluates an 7x7 grid with 15 alive cells 4 times:
+
+```
+cd build
+./bin/golSimulator random_initial -s 7 7 15 -n 4
+```
+
+![image2](random_initial.png)
+
+Finally, it can find stationary patterns.
