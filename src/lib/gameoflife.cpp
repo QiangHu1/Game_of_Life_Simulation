@@ -46,7 +46,7 @@ bool Gameoflife::compare(Grid grid_nex) {
   for (int r = 0; r < rows; r++) {
     for (int c = 0; c < cols; c++) {
       // If one cell different, those two grid are different
-      if (grid.Alive(r, c) != grid_nex.Alive(r, c)) {
+      if (grid.getc(r, c) != grid_nex.getc(r, c)) {
         return false;
       }
     }
