@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
   // Add options
   random_initial
       ->add_option("-s, -S", size, "Size of grid: rows cols alive_number")
-      ->check(CLI::NonNegativeNumber)
+      ->check(CLI::PositiveNumber)
       ->required()
       ->expected(3);
 
@@ -39,13 +39,13 @@ int main(int argc, char **argv) {
 
   find_pattern
       ->add_option("-c, -C", Control,
-                   "Control grid data: rows cols alive_number")
-      ->check(CLI::NonNegativeNumber)
+                   "Control grid data: rows cols alive_number condition_number")
+      ->check(CLI::PositiveNumber)
       ->required()
-      ->expected(3);
+      ->expected(4);
 
   app.add_option("-n,-N", genera_num, "Number of generations")
-      ->check(CLI::PositiveNumber);
+      ->check(CLI::NonNegativeNumber);
 
   CLI11_PARSE(app, argc, argv);
 
@@ -63,32 +63,31 @@ int main(int argc, char **argv) {
     }
     grid.printGrid();
   } else if (find_pattern->parsed()) {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < Control[3]; i++) {
       Gameoflife grid = *new Grid(Control[0], Control[1], Control[2]);
       Gameoflife grid_bef = *new Grid(Control[0], Control[1], 0);
-      Grid last_grid;
       bool same = true;
       for (int iter = 0; iter < genera_num - 1; iter++) {
         // The last two grid
         grid.takeStep();
-      }
-      // Compare the last two grid to last one
-      grid_bef = grid;
-      grid.takeStep();
-      int count = 0;
-      for (int r = 0; r < Control[0]; r++) {
-        for (int c = 0; c < Control[1]; c++) {
-          count += grid.grid.getc(r, c);
-          // If one cell different, those two grid are different
-          if (grid_bef.grid.getc(r, c) != grid.grid.getc(r, c)) {
-            same = false;
+        // Compare the last two grid to last one
+        grid_bef = grid;
+        grid.takeStep();
+        int count = 0;
+        for (int r = 0; r < Control[0]; r++) {
+          for (int c = 0; c < Control[1]; c++) {
+            count += grid.grid.getc(r, c);
+            // If one cell different, those two grid are different
+            if (grid_bef.grid.getc(r, c) != grid.grid.getc(r, c)) {
+              same = false;
+            }
           }
         }
-      }
-      // Print the result if grids are same and not all dead
-      if (same && count != 0) {
-        grid.printGrid();
-        break;
+        // Print the result if grids are same and not all dead
+        if (same && count != 0) {
+          grid.printGrid();
+          break;
+        }
       }
     }
   }
